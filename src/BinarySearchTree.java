@@ -4,8 +4,21 @@ public class BinarySearchTree {
         this.root = null;
     }
 
-    public void insert(Player player){}
-    private Node insert(Node current, Player player){
+    public void insert(Player player) {
+        root = insert(root, player);
+    }
+
+    private Node insert(Node current, Player player) {
+        if (current == null) {
+            return new Node(player);
+        }
+
+        if (player.getRanking() < current.player.getRanking()) {
+            current.left = insert(current.left, player);
+        } else if (player.getRanking() > current.player.getRanking()) {
+            current.right = insert(current.right, player);
+        }
+
         return current;
     }
 
