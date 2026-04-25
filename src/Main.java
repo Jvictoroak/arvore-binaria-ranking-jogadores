@@ -9,4 +9,6 @@ void main() {
     root.left = esquerda;
     root.right = direita;
 
+    BinarySearchTree binarySearchTree = new BinarySearchTree();
+
 }
