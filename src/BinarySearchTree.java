@@ -13,10 +13,10 @@ public class BinarySearchTree {
             return new Node(player);
         }
 
-        if (player.getRanking() < current.player.getRanking()) {
-            current.left = insert(current.left, player);
-        } else if (player.getRanking() > current.player.getRanking()) {
-            current.right = insert(current.right, player);
+        if (player.getRanking() < current.getPlayer().getRanking()) {
+            current.setLeft(insert(current.getLeft(), player));
+        } else if (player.getRanking() > current.getPlayer().getRanking()) {
+            current.setRight(insert(current.getRight(), player));
         }
 
         return current;
