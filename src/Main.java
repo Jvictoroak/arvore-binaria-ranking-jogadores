@@ -1,9 +1,12 @@
 void main() {
-    Player player = new Player("nickname01", 100);
-    System.out.println(player.getNickname());
-    System.out.println(player.getRanking());
-    player.setNickname("nickname01_edit");
-    player.setRanking(1);
-    System.out.println(player.getNickname());
-    System.out.println(player.getRanking());
+    Player player1 = new Player("nickname01", 100);
+    Player player2 = new Player("nickname02", 99);
+    Player player3 = new Player("nickname03", 98);
+
+    Node root = new Node(player1);
+    Node esquerda = new Node(player2);
+    Node direita = new Node(player3);
+    root.left = esquerda;
+    root.right = direita;
+
 }
