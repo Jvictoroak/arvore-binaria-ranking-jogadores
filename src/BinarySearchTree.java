@@ -29,10 +29,24 @@ public class BinarySearchTree {
         return null;
     }
 
-    public boolean search(String name){
-        return true;
+    public boolean search(String name) {
+        return search(root, name) != null;
     }
-    private Node search(Node current, String name){
-        return current;
+
+    private Node search(Node current, String name) {
+        if (current == null) {
+            return null;
+        }
+
+        if (current.getPlayer().getNickname().equals(name)) {
+            return current;
+        }
+
+        Node foundInLeft = search(current.getLeft(), name);
+        if (foundInLeft != null) {
+            return foundInLeft;
+        }
+
+        return search(current.getRight(), name);
     }
 }

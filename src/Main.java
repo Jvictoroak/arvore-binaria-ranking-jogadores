@@ -8,4 +8,7 @@ void main() {
     binarySearchTree.insert(player1);
     binarySearchTree.insert(player2);
     binarySearchTree.insert(player3);
+
+    System.out.println(binarySearchTree.search("nickname01"));
+    System.out.println(binarySearchTree.search("nickname04"));
 }
