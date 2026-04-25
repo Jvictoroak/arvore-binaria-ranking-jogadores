@@ -86,4 +86,9 @@ public class BinarySearchTree {
 
         return current;
     }
+
+    public Node getRoot() {
+        return root;
+    }
+
 }

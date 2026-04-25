@@ -1,6 +1,6 @@
-void main() {
-    BinarySearchTree binarySearchTree = new BinarySearchTree();
-
-    // Carrega os jogadores do CSV
-    CSVReader.loadPlayersFromCSV("src/data/players.csv", binarySearchTree);
+public class Main {
+    public static void main(String[] args) {
+        BinarySearchTree binarySearchTree = new BinarySearchTree();
+        CSVReader.loadPlayersFromCSV("src/data/players.csv", binarySearchTree);
+    }
 }
