@@ -10,5 +10,9 @@ void main() {
     binarySearchTree.insert(player3);
 
     System.out.println(binarySearchTree.search("nickname01"));
-    System.out.println(binarySearchTree.search("nickname04"));
+
+    binarySearchTree.remove("nickname01");
+
+    System.out.println(binarySearchTree.search("nickname01"));
+
 }

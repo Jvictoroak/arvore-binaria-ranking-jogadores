@@ -22,13 +22,6 @@ public class BinarySearchTree {
         return current;
     }
 
-    private Node remove(Node current, String name){
-        return current;
-    }
-    public Player remove(String name){
-        return null;
-    }
-
     public boolean search(String name) {
         return search(root, name) != null;
     }
@@ -48,5 +41,49 @@ public class BinarySearchTree {
         }
 
         return search(current.getRight(), name);
+    }
+
+    public Player remove(String name) {
+        Node nodeToRemove = search(root, name);
+        if (nodeToRemove == null) {
+            return null;
+        }
+        Player removedPlayer = nodeToRemove.getPlayer();
+        root = remove(root, name);
+        return removedPlayer;
+    }
+
+    private Node remove(Node current, String name) {
+        if (current == null) {
+            return null;
+        }
+
+        if (current.getPlayer().getNickname().equals(name)) {
+            if (current.getLeft() == null && current.getRight() == null) {
+                return null;
+            }
+
+            if (current.getLeft() == null) {
+                return current.getRight();
+            }
+
+            if (current.getRight() == null) {
+                return current.getLeft();
+            }
+
+            Node smallest = current.getRight();
+            while (smallest.getLeft() != null) {
+                smallest = smallest.getLeft();
+            }
+
+            current.setPlayer(smallest.getPlayer());
+            current.setRight(remove(current.getRight(), smallest.getPlayer().getNickname()));
+
+            return current;
+        }
+        current.setLeft(remove(current.getLeft(), name));
+        current.setRight(remove(current.getRight(), name));
+
+        return current;
     }
 }
