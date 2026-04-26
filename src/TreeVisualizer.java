@@ -16,6 +16,10 @@ public class TreeVisualizer extends Application {
 
     private BinarySearchTree bst;
     private Canvas canvas;
+    private final double NODE_RADIUS = 30;
+    private final double VERTICAL_SPACING = 100;
+    private final double INITIAL_CANVAS_WIDTH = 3000;
+    private final double INITIAL_CANVAS_HEIGHT = 1800;
 
     @Override
     public void start(Stage primaryStage) {
@@ -24,7 +28,7 @@ public class TreeVisualizer extends Application {
         bst = new BinarySearchTree();
         CSVReader.loadPlayersFromCSV("src/data/players.csv", bst);
 
-        canvas = new Canvas(1200, 700);
+        canvas = new Canvas(INITIAL_CANVAS_WIDTH, INITIAL_CANVAS_HEIGHT);
 
         TextField nameField = new TextField();
         nameField.setPromptText("Nickname");
@@ -88,6 +92,9 @@ public class TreeVisualizer extends Application {
         root.getChildren().addAll(inputs, buttons, resultLabel);
 
         ScrollPane scrollPane = new ScrollPane(new Group(canvas));
+        scrollPane.setPannable(true);
+        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
 
         VBox main = new VBox(10);
         main.getChildren().addAll(root, scrollPane);
@@ -111,44 +118,40 @@ public class TreeVisualizer extends Application {
             return;
         }
 
-        drawNode(gc, bst.getRoot(),canvas.getWidth() / 2,50,canvas.getWidth() / 4,1);
+        drawNode(gc, bst.getRoot(), canvas.getWidth() / 2, 60, canvas.getWidth() / 4, 1);
     }
 
     private void drawNode(GraphicsContext gc, Node node,double x, double y,double offset, int level) {
-
         if (node == null) return;
 
         if (node.getLeft() != null) {
             double nx = x - offset;
-            double ny = y + 60;
-
+            double ny = y + VERTICAL_SPACING;
             gc.setStroke(Color.GRAY);
-            gc.strokeLine(x, y + 15, nx, ny - 15);
-
+            gc.strokeLine(x, y + NODE_RADIUS, nx, ny - NODE_RADIUS);
             drawNode(gc, node.getLeft(), nx, ny, offset / 2, level + 1);
         }
-
         if (node.getRight() != null) {
             double nx = x + offset;
-            double ny = y + 60;
-
+            double ny = y + VERTICAL_SPACING;
             gc.setStroke(Color.GRAY);
-            gc.strokeLine(x, y + 15, nx, ny - 15);
-
+            gc.strokeLine(x, y + NODE_RADIUS, nx, ny - NODE_RADIUS);
             drawNode(gc, node.getRight(), nx, ny, offset / 2, level + 1);
         }
 
         gc.setFill(Color.LIGHTBLUE);
-        gc.fillOval(x - 15, y - 15, 30, 30);
-
+        gc.fillOval(x - NODE_RADIUS, y - NODE_RADIUS, NODE_RADIUS * 2, NODE_RADIUS * 2);
         gc.setStroke(Color.BLACK);
-        gc.strokeOval(x - 15, y - 15, 30, 30);
+        gc.strokeOval(x - NODE_RADIUS, y - NODE_RADIUS, NODE_RADIUS * 2, NODE_RADIUS * 2);
 
         gc.setFill(Color.BLACK);
-        gc.setFont(new javafx.scene.text.Font(9));
+        gc.setFont(new javafx.scene.text.Font(13));
+        String nickname = node.getPlayer().getNickname();
 
-        gc.fillText(node.getPlayer().getNickname(), x - 20, y - 18);
-        gc.fillText(String.valueOf(node.getPlayer().getRanking()), x - 5, y + 5);
+        gc.fillText(nickname, x - NODE_RADIUS + 2, y - 5);
+        gc.setFont(new javafx.scene.text.Font(11));
+        String rankingStr = String.valueOf(node.getPlayer().getRanking());
+        gc.fillText(rankingStr, x - 10, y + 15);
     }
 
     public static void main(String[] args) {
