@@ -15,7 +15,7 @@ public class BinarySearchTree {
 
         if (player.getRanking() < current.getPlayer().getRanking()) {
             current.setLeft(insert(current.getLeft(), player));
-        } else if (player.getRanking() > current.getPlayer().getRanking()) {
+        } else if (player.getRanking() >= current.getPlayer().getRanking()) {
             current.setRight(insert(current.getRight(), player));
         }
 
