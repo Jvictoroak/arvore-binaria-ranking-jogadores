@@ -62,9 +62,14 @@ public class TreeVisualizer extends Application {
             String name = nameField.getText();
 
             if (name != null && !name.isEmpty()) {
-                bst.remove(name);
-                resultLabel.setText("Removido: " + name);
-                redraw();
+                Player removed = bst.remove(name);
+
+                if (removed != null) {
+                    resultLabel.setText("Removido: " + name);
+                    redraw();
+                } else {
+                    resultLabel.setText("Não encontrado: " + name);
+                }
             }
         });
 
